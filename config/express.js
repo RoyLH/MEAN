@@ -1,10 +1,12 @@
 'us strict';
 
-const express = require('express'),
+const config = require('./config'),
+    express = require('express'),
     morgan = require('morgan'),
     compress = require('compression'),
     bodyParser = require('body-parser'),
-    methodOverride = require('method-override');
+    methodOverride = require('method-override'),
+    session = require('express-session');
 
 module.exports = () => {
     let app = express();
@@ -20,10 +22,17 @@ module.exports = () => {
     }));
     app.use(bodyParser.json());
     app.use(methodOverride());
+    app.use(session({
+        saveUninitialized: true,
+        resave: true,
+        secret: config.sessionSecret
+    }));
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
 
     require('../app/routes/index.server.routes')(app);
+
+    app.use(express.static('./public'));
 
     return app;
 };

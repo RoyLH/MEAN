@@ -1,7 +1,12 @@
 'use strict';
 
 exports.render = (req, res) => {
-    res.render('index', {
+    if (req.session.lastVisit) {
+        console.log(req.session.lastVisit);
+    }
+    req.session.lastVisit = new Date();
+    
+    return res.render('index', {
         title: 'Hello World'
     });
 };

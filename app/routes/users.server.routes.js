@@ -8,7 +8,9 @@ module.exports = (app) => {
         .get(users.list);
 
     app.route('/users/:userId')
-        .get(users.read);
+        .get(users.read)
+        .put(users.update)
+        .delete(users.delete);
 
     app.param('userId', users.userByID);
 };

@@ -6,7 +6,8 @@ const config = require('./config'),
     compress = require('compression'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
-    session = require('express-session');
+    session = require('express-session'),
+    passport = require('passport');
 
 module.exports = () => {
     let app = express();
@@ -36,6 +37,9 @@ module.exports = () => {
 
     require('../app/routes/index.server.routes')(app);
     require('../app/routes/users.server.routes')(app);
+
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     app.use(express.static('./public'));
 

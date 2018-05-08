@@ -32,14 +32,19 @@ module.exports = () => {
         resave: true,
         secret: config.sessionSecret // 为了标记会话，需要使用一个密钥，这可以有效防止恶意的会话污染。为了安全起见，建议在不同的环境使用不同的cookie密钥
     }));
+    
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
 
+    // 在Express应用中注册passport中间件
+    // 1. passport.initialize()用于启动passport模块 对passport进行初始化，否则后面的验证方法无法执行
+    app.use(passport.initialize());
+    // 2. passport.session()用于Express应用追踪用户会话(session) 这个主要是为了记住用户的登录状态，可以指定session过期时间
+    app.use(passport.session());
+
+    // 一一将路由文件加载入Express应用中，初始化Express路由
     require('../app/routes/index.server.routes')(app);
     require('../app/routes/users.server.routes')(app);
-
-    app.use(passport.initialize());
-    app.use(passport.session());
 
     app.use(express.static('./public'));
 

@@ -6,10 +6,6 @@ const mongoose = require('mongoose'),
 let UserSchema = new Schema({
     firstName: String,
     lastName: String,
-    email: {
-        type: String,
-        index: true // Secondary Index 辅助索引
-    },
     username: {
         type: String,
         trim: true,
@@ -17,6 +13,15 @@ let UserSchema = new Schema({
         required: '请填写用户名'
     },
     password: String,
+    email: {
+            type: String,
+            index: true, // Secondary Index 辅助索引
+            match: /.+\@.+\..+/
+    },
+    role: {
+        type: String,
+        enum: ['Admin', 'Owner', 'User']
+    },
     website: {
         type: String,
         set: function (url) {

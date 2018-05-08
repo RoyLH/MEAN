@@ -24,6 +24,11 @@ exports.userByID = (req, res, next, id) => {
         })
         .exec()
         .then((user) => {
+            if (!user) {
+                res.json({
+                    message: '不存在此用户'
+                });
+            }
             req.user = user;
             next();
         })

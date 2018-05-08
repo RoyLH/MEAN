@@ -7,7 +7,7 @@ exports.create = (req, res, next) => {
     let user = new User(req.body);
 
     user.save()
-        .then((user) => res.json(user))
+        .then((user) => res.json(user)) // 这里的user是插入后的新文档
         .catch(next);
 };
 

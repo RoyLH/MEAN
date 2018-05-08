@@ -12,3 +12,13 @@ exports.create = (req, res, next) => {
         })
         .catch(next);
 };
+
+exports.list = (req, res, next) => {
+    User.find()
+        .exec()
+        .then((users) => {
+            return res.json(users);
+        })
+        .catch(next);
+};
+

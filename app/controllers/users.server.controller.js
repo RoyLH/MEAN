@@ -51,7 +51,7 @@ exports.read = (req, res, next) => {
 };
 
 exports.update = (req, res, next) => {
-    User.findByIdAndUpdate(req.user.id, req.body) // 注意这里req.user.id 和 req.user._id都是可以的
+    User.findByIdAndUpdate(req.user._id, req.body) // 注意这里req.user.id 和 req.user._id都是可以的
         .then((user) => res.json(user)) // 注意这里的user是修改之前的 不是修改之后的user
         .catch((err) => {
             if (err) return res.json({

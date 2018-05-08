@@ -41,11 +41,19 @@ UserSchema.virtual('fullName')
         let splitName = fullName.split(' ');
         this.firstName = splitName[0] || '';
         this.lastName = splitName[1] || '';
-    })
+    });
 
 UserSchema.set('toJSON', {
     getters: true, // 在res.json()等方法中, 文档转换为JSON默认不会执行getter修饰符的操作, 所以这里保证在这种情况下强制执行getter修饰符
     virtuals: true
 });
+
+UserSchema.statics.findOneByUsername = function(username, callback) {
+    this.findOne({ username: new RegExp(username, 'i')}, callback);
+};
+
+UserSchema.methods.authenticate = function(password) {
+    return this.password === password;
+};
 
 mongoose.model('User', UserSchema, 'users');

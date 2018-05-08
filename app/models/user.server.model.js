@@ -10,9 +10,12 @@ let UserSchema = new Schema({
         type: String,
         trim: true,
         unique: true, // Unique Index 唯一索引
-        required: '请填写用户名'
+        required: 'Username can not be blank'
     },
-    password: String,
+    password: {
+        type: String,
+        validate: [(password) => password.length >= 6, 'Password should be longer']
+    },
     email: {
             type: String,
             index: true, // Secondary Index 辅助索引
@@ -54,12 +57,12 @@ UserSchema.set('toJSON', { // 一下两个设置中的任何一个 都会使整�
     virtuals: true // 在toJSON方法的时候, 能支持虚拟属性功能
 });
 
-// UserSchema.statics.findOneByUsername = function(username, callback) {
-//     this.findOne({ username: new RegExp(username, 'i')}, callback);
-// };
+UserSchema.statics.findOneByUsername = function(username, callback) {
+    this.findOne({ username: new RegExp(username, 'i')}, callback);
+};
 
-// UserSchema.methods.authenticate = function(password) {
-//     return this.password === password;
-// };
+UserSchema.methods.authenticate = function(password) {
+    return this.password === password;
+};
 
 mongoose.model('User', UserSchema, 'users');

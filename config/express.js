@@ -7,6 +7,7 @@ const config = require('./config'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     session = require('express-session'),
+    flash = require('connect-flash'),
     passport = require('passport');
 
 module.exports = () => {
@@ -35,6 +36,8 @@ module.exports = () => {
     
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
+
+    app.use(flash()); // 提供了req.flash()方法用于创建和检索flash消息
 
     // 在Express应用中注册passport中间件
     // 1. passport.initialize()用于启动passport模块 对passport进行初始化，否则后面的验证方法无法执行

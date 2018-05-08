@@ -3,6 +3,88 @@
 const mongoose = require('mongoose'),
     User = mongoose.model('User');
 
+// 私有方法getErrorMessage主要用于处理Mongoose错误对象并返回统一格式的错误消息
+// 这里重要存在以下两种错误
+let getErrorMessage = (err) => {
+    let message = '';
+    
+    if (err.code) { // 第一种错误: 来自MongoDB索错误的错误代码
+        switch (err.code) {
+            case 11000:
+            case 11001:
+                message = 'Username already exists';
+                break;
+            default:
+                message = 'Somrthing went wrong';
+                break;
+        }
+    } else { // 第二种错误: Mongoose校验错误的error.errors对象
+        for (let errName in err.errors) {
+            message = err.errors[errName].message ? err.errors[errName].message : '';
+        }
+
+        return message;
+    }
+};
+
+exports.renderSignin = (req, res, next) => {
+    if (!req.user) {
+        res.render('signin', {
+            title: 'Sign-in Form',
+            message: req.flash('error') || req.flash('info')
+        });
+    } else {
+        return res.redirect('/');
+    }
+};
+
+exports.renderSignup = (req, res, next) => {
+    if (!req.user) {
+        res.render('signup', {
+            title: 'Sign-up Form',
+            message: req.flash('error')
+        });
+    } else {
+        return res.redirect('/');
+    }
+};
+
+exports.signup = (req, res, next) => {
+    if (!req.user) {
+        let user = new User(req.body);
+        let message = null;
+
+        user.provider = 'local';
+
+        user.save()
+            .then((user) => {
+                // 1. passport.authenticate() 方法会自动调用 req.login()方法, 所以我们只需要在注册的时候手动在这里调用一次req.login()方法.
+                // 2. 如果成功, user会被挂到req.user对象上
+                req.login(user, (err) => {
+                    if (err) return next(err);
+                    return res.redirect('/');
+                });
+            })
+            .catch((err) => {
+                let message = getErrorMessage(err);
+
+                req.flash('error', message);
+                return res.redirect('/signup');
+            });
+    } else {
+        return res.redirect('/');
+    }
+};
+
+// 为什么没有 export.signin()方法 这是因为 passport提供了一个专门的身份验证方法, 可以直接用于定义路由
+
+exports.signout = (req, res, next) => {
+    req.logout();
+    return res.redirect('/');
+};
+
+
+
 exports.create = (req, res, next) => {
     let user = new User(req.body);
 

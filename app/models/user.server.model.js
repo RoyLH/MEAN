@@ -9,7 +9,8 @@ let UserSchema = new Schema({
     email: String,
     username: {
         type: String,
-        trim: true
+        trim: true,
+        unique: true
     },
     password: String,
     website: {
@@ -29,7 +30,19 @@ let UserSchema = new Schema({
     }
 });
 
-// 在res.json()等方法中, 文档转换为JSON默认不会执行getter修饰符的操作, 所以这里调用UserSchema.set()方法 以保证在这种情况下强制执行getter修饰符
-UserSchema.set('toJSON', {getters: true});
+UserSchema.virtual('fullName')
+    .get(function () {
+        return this.firstName + ' ' + this.lastName;
+    })
+    .set(function(fullName) {
+        let splitName = fullName.split(' ');
+        this.firstName = splitName[0] || '';
+        this.lastName = splitName[1] || '';
+    })
+
+UserSchema.set('toJSON', {
+    getters: true, // 在res.json()等方法中, 文档转换为JSON默认不会执行getter修饰符的操作, 所以这里保证在这种情况下强制执行getter修饰符
+    virtuals: true
+});
 
 mongoose.model('User', UserSchema, 'users');

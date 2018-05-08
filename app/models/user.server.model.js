@@ -13,7 +13,8 @@ let UserSchema = new Schema({
     username: {
         type: String,
         trim: true,
-        unique: true // Unique Index 唯一索引
+        unique: true, // Unique Index 唯一索引
+        required: '请填写用户名'
     },
     password: String,
     website: {

@@ -6,11 +6,14 @@ const mongoose = require('mongoose'),
 let UserSchema = new Schema({
     firstName: String,
     lastName: String,
-    email: String,
+    email: {
+        type: String,
+        index: true // Secondary Index 辅助索引
+    },
     username: {
         type: String,
         trim: true,
-        unique: true
+        unique: true // Unique Index 唯一索引
     },
     password: String,
     website: {

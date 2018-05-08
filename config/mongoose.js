@@ -5,5 +5,8 @@ const config = require('./config'),
 
 module.exports = () => {
     let db = mongoose.connect(config.db);
-     return db;
+
+    require('../app/models/user.server.model');
+    
+    return db;
 };

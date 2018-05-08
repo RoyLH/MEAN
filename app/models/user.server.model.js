@@ -49,17 +49,17 @@ UserSchema.virtual('fullName')
         this.lastName = splitName[1] || '';
     });
 
-UserSchema.set('toJSON', {
+UserSchema.set('toJSON', { // 一下两个设置中的任何一个 都会使整个res.json()的返回文档中多出一个id属性 其值是等于_id属性的
     getters: true, // 在res.json()等方法中, 文档转换为JSON默认不会执行getter修饰符的操作, 所以这里保证在这种情况下强制执行getter修饰符
-    virtuals: true
+    virtuals: true // 在toJSON方法的时候, 能支持虚拟属性功能
 });
 
-UserSchema.statics.findOneByUsername = function(username, callback) {
-    this.findOne({ username: new RegExp(username, 'i')}, callback);
-};
+// UserSchema.statics.findOneByUsername = function(username, callback) {
+//     this.findOne({ username: new RegExp(username, 'i')}, callback);
+// };
 
-UserSchema.methods.authenticate = function(password) {
-    return this.password === password;
-};
+// UserSchema.methods.authenticate = function(password) {
+//     return this.password === password;
+// };
 
 mongoose.model('User', UserSchema, 'users');

@@ -42,6 +42,24 @@ let UserSchema = new Schema({
     }
 });
 
+// 预处理中间件 在操作执行前触发
+UserSchema.pre('save', (next) => {
+    if (true) {
+        next();
+    } else {
+        next(new Error('An Error Accured'));
+    }
+});
+
+// 后置处理中间件 在操作执行完成后触发
+UserSchema.post('save', (next) => {
+    if (this.isNew) { // 用isNew判断是创建操作还是更新操作
+        console.log('A new user was crated.');
+    } else {
+        console.log('A user updated is details.');
+    }
+});
+
 UserSchema.virtual('fullName')
     .get(function () {
         return this.firstName + ' ' + this.lastName;

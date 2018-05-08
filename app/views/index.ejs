@@ -7,7 +7,16 @@
     <title><%= title %></title>
 </head>
 <body>
-    <h1><%= title %></h1>
-    <img src="/img/logo.png" alt="">
+    <% if( userFullName) { %>
+        <h2>Hello <= userFullName %></h2>
+        <a href="/signout">Sign out</a>
+    <% } else {%>
+        <a href="/signup">Sign up</a>
+        <a href="/signin">Sign in</a>
+    <% } %>
+
+    <br>
+
+    <img src="/img/logo.png" alt="Logo">
 </body>
 </html>

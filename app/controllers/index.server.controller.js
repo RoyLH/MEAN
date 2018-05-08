@@ -7,6 +7,7 @@ exports.render = (req, res) => {
     req.session.lastVisit = new Date();
     
     return res.render('index', {
-        title: 'Hello World'
+        title: 'Hello World',
+        userFullName: req.user ? req.user.fullName : ''
     });
 };

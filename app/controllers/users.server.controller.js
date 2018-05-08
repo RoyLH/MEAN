@@ -58,7 +58,7 @@ exports.signup = (req, res, next) => {
 
         user.save()
             .then((user) => {
-                // 1. passport.authenticate() 方法会自动调用 req.login()方法, 所以我们只需要在注册的时候手动在这里调用一次req.login()方法.
+                // 1. passport.authenticate()方法会自动调用 req.login()方法, 所以我们只需要在注册的时候手动在这里调用一次req.login()方法.
                 // 2. 如果成功, user会被挂到req.user对象上
                 req.login(user, (err) => {
                     if (err) return next(err);
@@ -76,7 +76,7 @@ exports.signup = (req, res, next) => {
     }
 };
 
-// 为什么没有 export.signin()方法 这是因为 passport提供了一个专门的身份验证方法, 可以直接用于定义路由
+// 为什么没有 export.signin()方法 这是因为 passport提供了一个专门的身份验证方法, 可以直接用于定义路由 即passport.authenticate()方法
 
 exports.signout = (req, res, next) => {
     req.logout();

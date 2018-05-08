@@ -14,7 +14,7 @@ exports.create = (req, res, next) => {
 };
 
 exports.list = (req, res, next) => {
-    User.find()
+    User.find({})
         .exec()
         .then((users) => {
             return res.json(users);
@@ -22,3 +22,17 @@ exports.list = (req, res, next) => {
         .catch(next);
 };
 
+exports.read = (req, res, next) => {
+    return res.json(req.user);
+};
+
+exports.userByID = (req, res, next, id) => {
+    User.findOne({ _id: id })
+        .exec()
+        .then((user) => {
+            console.log(user);
+            req.user = user;
+            next();
+        })
+        .catch(next);
+};

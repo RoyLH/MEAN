@@ -8,7 +8,7 @@
 </head>
 <body>
     <% if( userFullName) { %>
-        <h2>Hello <= userFullName %></h2>
+        <h2>Hello <%= userFullName %></h2>
         <a href="/signout">Sign out</a>
     <% } else {%>
         <a href="/signup">Sign up</a>

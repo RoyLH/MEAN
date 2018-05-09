@@ -1,6 +1,7 @@
 'use strict';
 
-const users = require('../../app/controllers/users.server.controller');
+const users = require('../../app/controllers/users.server.controller'),
+    passport = require('passport');
 
 module.exports = (app) => {
     app.route('/users')
@@ -13,11 +14,11 @@ module.exports = (app) => {
         .delete(users.delete);
 
     app.route('/signup')
-        .get(user.renderSignup)
+        .get(users.renderSignup)
         .post(users.signup);
 
     app.route('/signin')
-        .get(user.renderSignin)
+        .get(users.renderSignin)
         .post(passport.authenticate('local', {
             successRedirect: '/',
             failuredirect: '/signin',

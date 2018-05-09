@@ -1,6 +1,6 @@
 'use strict';
 
-const passpport = require('passport'),
+const passport = require('passport'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
 

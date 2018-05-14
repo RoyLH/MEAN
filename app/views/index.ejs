@@ -6,17 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%= title %></title>
 </head>
+<style>
+    html {
+        height: 100%;
+    }
+    body {
+        margin: 0;
+        padding:0;
+        background-color: #eee;
+        position: relative;
+        height: 100%;
+    }
+    #container {
+        width: 100%;
+        text-align: center;
+        height: 100px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin:auto;
+    }
+    #container a {
+        display: inline-block;
+    }
+</style>
 <body>
-    <% if( userFullName) { %>
-        <h2>Hello <%= userFullName %></h2>
-        <a href="/signout">Sign out</a>
-    <% } else {%>
-        <a href="/signup">Sign up</a>
-        <a href="/signin">Sign in</a>
-    <% } %>
+    <div id="container">
+        <img src="/img/logo.png" alt="Logo">
 
-    <br>
+        <br>
 
-    <img src="/img/logo.png" alt="Logo">
+        <% if( userFullName) { %>
+            <h2>Hello
+                <%= userFullName %>
+            </h2>
+            <a href="/signout">Sign out</a>
+        <% } else {%>
+            <a href="/signup">Sign up</a>
+            <a href="/signin">Sign in</a>
+        <% } %>
+    </div>
+    
+    
 </body>
 </html>

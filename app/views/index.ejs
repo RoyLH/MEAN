@@ -24,18 +24,22 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        margin:auto;
+        margin: auto;
     }
     #container a {
         display: inline-block;
+        text-decoration: none;
+        background-color: #39e;
+        color: #fff;
+        width: 100px;
+        line-height: 30px;
+        border-radius: 15px;
     }
 </style>
 <body>
     <div id="container">
         <img src="/img/logo.png" alt="Logo">
-
         <br>
-
         <% if( userFullName) { %>
             <h2>Hello
                 <%= userFullName %>

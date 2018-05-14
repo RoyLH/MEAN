@@ -8,6 +8,51 @@
     <title>
         <%= title %>
     </title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding:0;
+            background-color: #eee;
+            position: relative;
+            height: 100%;
+        }
+        #container {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .signin-form {
+            width: 350px;
+            margin: 0 auto;
+            transform: translateY(-50%) translateX(-50%);
+            left: 50%;
+            position: absolute;
+            top: 40%;
+        }
+
+        .signin-form input {
+            text-indent: 15px;
+            width: 100%;
+            border: 1px solid #ccc;
+            line-height: 32px;
+            height: 32px;
+            border-radius: 16px;
+            margin-bottom: 15px; 
+        } 
+        .signin-form .submit-button {
+            background: #39e;
+            border: 1px solid #39e;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <% for(var i in messages) { %>
@@ -15,18 +60,18 @@
             <%= messages[i] %>
         </div>
     <% } %>
-    <form action="/signin" method="post">
-        <div>
-            <label for="">Username:</label>
-            <input type="text" name="username">
-        </div>
-        <div>
-            <label for="">Password:</label>
-            <input type="password" name="password">
-        </div>
-        <div>
-            <input type="submit" value="Sign in">
-        </div>
-    </form>
+    <div id="container">
+        <form action="/signin" method="post" class="signin-form">
+            <div>
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div>
+                <input type="submit" value="Sign in" class="submit-button">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

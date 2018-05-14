@@ -5,6 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%= title %></title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #eee;
+            position: relative;
+            height: 100%;
+        }
+
+        #container {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .signup-form {
+            width: 350px;
+            margin: 0 auto;
+            transform: translateY(-50%) translateX(-50%);
+            left: 50%;
+            position: absolute;
+            top: 40%;
+        }
+
+        .signup-form input {
+            text-indent: 15px;
+            width: 100%;
+            border: 1px solid #ccc;
+            line-height: 32px;
+            height: 32px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+
+        .signup-form .submit-button {
+            background: #39e;
+            border: 1px solid #39e;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <% for(var i in messages) { %>
@@ -12,29 +60,24 @@
             <%= messages[i] %>
         </div>
     <% } %>
-    <form action="/signup" method="post">
+    <form action="/signup" method="post" class="signup-form">
         <div>
-            <label for="">First Name:</label>
-            <input type="text" name="firstName">
+            <input type="text" name="firstName" placeholder="First Name">
         </div>
         <div>
-            <label for="">Last Name:</label>
-            <input type="text" name="lastName">
+            <input type="text" name="lastName" placeholder="Last Name">
         </div>
         <div>
-            <label for="">Email:</label>
-            <input type="text" name="email">
+            <input type="text" name="email" placeholder="Email">
         </div>
         <div>
-            <label for="">Username:</label>
-            <input type="text" name="username">
+            <input type="text" name="username" placeholder="Email">
         </div>
         <div>
-            <label for="">Password:</label>
-            <input type="password" name="password">
+            <input type="password" name="password" placeholder="Password">
         </div>
         <div>
-            <input type="submit" value="Sign up">
+            <input type="submit" value="Sign up" class="submit-button">
         </div>
     </form>
 </body>

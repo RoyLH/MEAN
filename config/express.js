@@ -37,7 +37,7 @@ module.exports = () => {
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
 
-    app.use(flash()); // 提供了req.flash()方法用于创建和检索flash消息 其实质试是对req.session.flash的操作
+    app.use(flash()); // 提供了req.flash()方法用于创建和检索flash消息 其实质是对req.session.flash的操作
     // flash是session中一个用于存储信息的特殊区域。 消息写入到flash中，在跳转目标页中显示该消息。flash是配置redirect一同使用的，以确保消息在目标页面中可用。
     // flash 可用于一次性的消息提示， 比如注册， 登录页面， 当你再次刷新时， flash就没有提示消息了。
 

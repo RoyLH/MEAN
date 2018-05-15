@@ -76,7 +76,7 @@ exports.signup = (req, res, next) => {
     }
 };
 
-// 为什么没有 export.signin()方法 这是因为 passport提供了一个专门的身份验证方法, 可以直接用于定义路由 即passport.authenticate()方法
+// 为什么没有 exports.signin()方法 这是因为 passport提供了一个专门的身份验证方法, 可以直接用于定义路由 即passport.authenticate()方法
 
 exports.signout = (req, res, next) => {
     req.logout();

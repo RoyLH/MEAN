@@ -20,7 +20,7 @@
             height: 100%;
         }
         #container {
-            width: 100%;
+            width: 350px;
             position: absolute;
             top: 0;
             bottom: 0;
@@ -30,7 +30,7 @@
         }
 
         .signin-form {
-            width: 350px;
+            width: 100%;
             margin: 0 auto;
             transform: translateY(-50%) translateX(-50%);
             left: 50%;
@@ -47,6 +47,7 @@
             border-radius: 16px;
             margin-bottom: 15px; 
             outline: none;
+            font-size: 14px
         } 
         .signin-form .submit-button {
             background: #39e;
@@ -54,8 +55,19 @@
             color: #fff;
         }
         input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0px 1000px white inset;
             border: 1px solid #CCC!important;
+        }
+
+        .signin-form a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #39e;
+            color: #fff;
+            width: 100%;
+            line-height: 30px;
+            border-radius: 15px;
+            font-size: 14px;
+            text-align: center;
         }
 
     </style>
@@ -77,7 +89,10 @@
             <div>
                 <input type="submit" value="Sign in" class="submit-button">
             </div>
+
+            <a href="/oauth/facebook">Sign in with Facebook</a>
         </form>
+        
     </div>
 </body>
 </html>

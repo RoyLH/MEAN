@@ -27,22 +27,22 @@ let getErrorMessage = (err) => {
     }
 };
 
-exports.renderSignin = (req, res, next) => {
+exports.renderSignup = (req, res, next) => {
     if (!req.user) {
-        res.render('signin', {
-            title: 'Sign-in Form',
-            messages: req.flash('error') || req.flash('info')
+        res.render('signup', {
+            title: 'Sign-up Form',
+            messages: req.flash('error')
         });
     } else {
         return res.redirect('/');
     }
 };
 
-exports.renderSignup = (req, res, next) => {
+exports.renderSignin = (req, res, next) => {
     if (!req.user) {
-        res.render('signup', {
-            title: 'Sign-up Form',
-            messages: req.flash('error')
+        res.render('signin', {
+            title: 'Sign-in Form',
+            messages: req.flash('error') || req.flash('info')
         });
     } else {
         return res.redirect('/');
@@ -106,27 +106,6 @@ exports.list = (req, res, next) => {
         });
 };
 
-exports.userByID = (req, res, next, id) => {
-    User.findOne({
-            _id: id
-        })
-        .exec()
-        .then((user) => {
-            if (!user) {
-                res.json({
-                    message: '不存在此用户'
-                });
-            }
-            req.user = user;
-            next();
-        })
-        .catch((err) => {
-            if (err) return res.json({
-                message: err.message
-            });
-        });
-};
-
 exports.read = (req, res, next) => {
     return res.json(req.user);
 };
@@ -144,6 +123,27 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res, next) => {
     req.user.remove() //这里直接从req.user删除了
         .then((user) => res.json(user)) // 这里是删除前的user 这是因为在 userByID 方法中, req.user = user 这两个对象的指向是相同的 都是实例 可以删除
+        .catch((err) => {
+            if (err) return res.json({
+                message: err.message
+            });
+        });
+};
+
+exports.userByID = (req, res, next, id) => {
+    User.findOne({
+            _id: id
+        })
+        .exec()
+        .then((user) => {
+            if (!user) {
+                res.json({
+                    message: '不存在此用户'
+                });
+            }
+            req.user = user;
+            next();
+        })
         .catch((err) => {
             if (err) return res.json({
                 message: err.message

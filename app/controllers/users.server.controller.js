@@ -83,8 +83,6 @@ exports.signout = (req, res, next) => {
     return res.redirect('/');
 };
 
-
-
 exports.create = (req, res, next) => {
     let user = new User(req.body);
 
@@ -128,6 +126,7 @@ exports.userByID = (req, res, next, id) => {
             });
         });
 };
+
 exports.read = (req, res, next) => {
     return res.json(req.user);
 };

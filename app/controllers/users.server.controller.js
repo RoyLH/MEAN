@@ -83,6 +83,7 @@ exports.signout = (req, res, next) => {
     return res.redirect('/');
 };
 
+// 实际应用中 应该都是通过 signup 及入口登陆的 而不会用到该 create接口 此接口只是作为一个演示
 exports.create = (req, res, next) => {
     let user = new User(req.body);
 

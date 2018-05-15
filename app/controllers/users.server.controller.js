@@ -83,6 +83,39 @@ exports.signout = (req, res, next) => {
     return res.redirect('/');
 };
 
+exports.saveOAuthUserProfile = (req, profile, done) => {
+    User.findOne({
+            provider: profile.provider,
+            providerId: profile.providerId
+        })
+        .exec()
+        .then(function (user) {
+            if (!user) {
+                var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
+                User.findUniqueUsername(possibleUsername, null, (availableUsername) => {
+                    profile.username = availableUsername;
+
+                    user = new User(profile);
+
+                    user.save(function (err) {
+                        if (err) {
+                            var message = this.getErrorMessage(err);
+
+                            req.flash('error', message);
+                            return req.redirect('/signup');
+                        }
+                        return done(err, user);
+                    });
+                });
+            } else {
+                return done(null, user);
+            }
+        })
+        .catch((err) => {
+            return done(err);
+        });
+};
+
 // 实际应用中 应该都是通过 signup 及入口登陆的 而不会用到该 create接口 此接口只是作为一个演示
 exports.create = (req, res, next) => {
     let user = new User(req.body);

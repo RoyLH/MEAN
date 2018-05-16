@@ -9,8 +9,8 @@ module.exports = {
         callbackURL: 'http://localhost:3000/oauth/facebook/callback'
     },
     twitter: {
-        consumerKey: 'twitterConsumerKeyD',
-        consumerSecret: 'twitterConsumerSecret',
+        consumerKey: 'tybP8KZMI5Qer0LIpES3vLMva',
+        consumerSecret: 'ZJDVmyNdmRtkkN1cnRZSVVaN4vgqV1c1j5nb2rd8MdvVmcxltu',
         callbackURL: 'http://localhost:3000/oauth/twitter/callback'
     },
     google: {

@@ -14,8 +14,8 @@ module.exports = {
         callbackURL: 'http://localhost:3000/oauth/twitter/callback'
     },
     google: {
-        clientID: 'googleClientID',
-        clientSecret: 'googleClientSecret',
+        clientID: '361041994869-v5vl8amkgtbfg493meps1nmk52augacp.apps.googleusercontent.com',
+        clientSecret: '2k0IT3Vdrh1QXN6Q0y8CruEa',
         callbackURL: 'http://localhost:3000/oauth/google/callback'
     }
 };

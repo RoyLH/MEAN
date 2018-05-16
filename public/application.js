@@ -2,7 +2,7 @@
 
 var mainApplicationModuleName = 'mean';
 
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['example']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngRoute', 'example']);
 
 // 使用 angular 对象的 jqLite 功能对文当加载事件进行了绑定 
 // 该功能执行了 angular.bootstrap() 方法来使用刚创建的应用主模块对新创建的 AngularJs 应用进行手动初始化

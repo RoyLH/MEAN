@@ -40,18 +40,21 @@
     <div id="container">
         <img src="/img/logo.png" alt="Logo">
         <br>
-        <% if( userFullName) { %>
-            <h2>Hello
-                <%= userFullName %>
-            </h2>
+        <%= if (user) {%>
             <a href="/signout">Sign out</a>
-        <% } else {%>
+        <% } else { %>
             <a href="/signup">Sign up</a>
             <a href="/signin">Sign in</a>
         <% } %>
+
     </div>
+
     <!-- <section ng-include="'example/views/example.client.view.html'"></section> -->
     <section ng-view></section>
+
+    <script type="text/javascript">
+        window.user = <%- user || 'null' %>;
+    </script>
 
     <script type="text/javascript" src="/lib/angular/angular.js"></script>
     <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>

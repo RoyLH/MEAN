@@ -1,0 +1,21 @@
+{
+  "name": "mean",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "RoyCook <lh1104513635@163.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/RoyLH/MEAN",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.0"
+  }
+}

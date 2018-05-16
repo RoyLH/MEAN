@@ -2,13 +2,21 @@
 
 exports.render = (req, res) => {
     if (req.session.lastVisit) {
+
+        console.log('========== req.session.lastVisit ==========');
         console.log(req.session.lastVisit);
+
+        console.log('========== req.session ==========');
+        console.log(req.session);
+
+        console.log('========== req.user ==========');
+        console.log(req.user);
     }
+
     req.session.lastVisit = new Date();
-    
-    return res.render('index', {
+
+    res.render('index', {
         title: 'Hello World',
-        userFullName: req.user ? req.user.fullName : '',
         user: JSON.stringify(req.user)
     });
 };

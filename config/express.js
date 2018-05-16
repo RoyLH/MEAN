@@ -47,11 +47,13 @@ module.exports = () => {
     // 2. passport.session()用于Express应用追踪用户会话(session) 这个主要是为了记住用户的登录状态，可以指定session过期时间
     app.use(passport.session());
 
+    app.use(express.static('./public'));
+    
     // 一一将路由文件加载入Express应用中，初始化Express路由
     require('../app/routes/index.server.routes')(app);
     require('../app/routes/users.server.routes')(app);
 
-    app.use(express.static('./public'));
+    
 
     return app;
 };

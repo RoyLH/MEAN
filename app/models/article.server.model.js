@@ -20,7 +20,7 @@ let ArticleSchema = new Schema({
         ref: 'User'
     }
 }, {
-    timeStamp: {
+    timestamps: {
         createdAt: 'created',
         updatedAt: 'updated'
     }

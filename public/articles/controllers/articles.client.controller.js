@@ -21,7 +21,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$routePa
     };
 
     $scope.findOne = function () {
-        $scope.article = Articles.$get({
+        $scope.article = Articles.get({
             articleId: $routeParams.articleId
         });
     };

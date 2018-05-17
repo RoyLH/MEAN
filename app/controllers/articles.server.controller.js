@@ -46,6 +46,7 @@ exports.articleById = (req, res, next, id) => {
         .then((article) => {
             if(!article) return next(new Error(`Failed to load article ${id}`));
 
+            req.article = article;
             return next();
         })
         .catch((err) => {

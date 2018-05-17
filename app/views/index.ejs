@@ -39,11 +39,10 @@
 <body>
     <div id="container">
         <img src="/img/logo.png" alt="Logo">
+        <!-- <section ng-include="'example/views/example.client.view.html'"></section> -->
+        <section ng-view></section>
     </div>
-
-    <!-- <section ng-include="'example/views/example.client.view.html'"></section> -->
-    <section ng-view></section>
-
+    
     <script type="text/javascript">
         window.user = <%- user || 'null' %>;
     </script>

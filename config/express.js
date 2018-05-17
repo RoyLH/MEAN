@@ -53,7 +53,5 @@ module.exports = () => {
     require('../app/routes/index.server.routes')(app);
     require('../app/routes/users.server.routes')(app);
 
-    
-
     return app;
 };

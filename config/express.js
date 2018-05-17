@@ -52,6 +52,7 @@ module.exports = () => {
     // 一一将路由文件加载入Express应用中，初始化Express路由
     require('../app/routes/index.server.routes')(app);
     require('../app/routes/users.server.routes')(app);
+    require('../app/routes/articles.server.routes')(app);
 
     return app;
 };

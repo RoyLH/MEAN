@@ -33,6 +33,6 @@ module.exports = () => {
     });
 
     io.on('connection', function (socket) {
-        /* */
+        require('../app/controllers/chat.server.controller')(io, socket);
     });
 };

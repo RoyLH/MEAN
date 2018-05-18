@@ -6,7 +6,7 @@ const mongoose = require('./config/mongoose'),
     
 
 let db = mongoose(),
-    app = express(),
+    app = express(db),
     passport = require('./config/passport')();
 
 app.listen(3000);

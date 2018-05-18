@@ -64,5 +64,7 @@ module.exports = (db) => {
     require('../app/routes/users.server.routes')(app);
     require('../app/routes/articles.server.routes')(app);
 
+    require('./socketio')(server, io, mongoStore);
+    
     return server;
 };

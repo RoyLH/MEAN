@@ -10,6 +10,7 @@ const config = require('./config'),
     MongoStore = require('connect-mongo')(session);
     flash = require('connect-flash'),
     passport = require('passport'),
+    http = require('http'),
     socketio = require('socket.io');
 
 module.exports = (db) => {
@@ -33,7 +34,8 @@ module.exports = (db) => {
     // 导致一个严重问题就是无法再应用的socket层中使用passport来进行身份验证 为此需要配置一个持久的会话存储 以便于在socket的握手中访问express的会话信息
     // express会话信息都是存储在内存中的，所以socket.io无法对其进行访问 因此更好的办法是将会话信息保存在MongoDB中
     let mongoStore = new MongoStore({
-        db: db.connection.db
+        // db: db.connection.db
+        url: config.db
     });
     // express-session模块通过浏览器的cookie来存储用户的唯一标识
     // session 中间件会为应用中所有的请求对象增加一个session对象(req.session)，通过这个对象可以设置或者获取当前会话的任意属性(req.session.xxx)。

@@ -12,16 +12,16 @@ module.exports = function (config) {
             'public/*[!lib]*/tests/unit/*.js',
             'public/core/**/*.html'
         ],
-        preprocessors: {
-            'public/core/**/*.html': ['ng-html2js']
-        },
-        ngHtml2JsPreprocessor: {
-            moduleName: 'mean',
+        // preprocessors: {
+            // 'public/core/**/*.html': ['ng-html2js']
+        // },
+        // ngHtml2JsPreprocessor: {
+        //     moduleName: 'mean',
 
-            cacheIdFromPath: function (filepath) {
-                return filepath;
-            }
-        },
+        //     cacheIdFromPath: function (filepath) {
+        //         return filepath;
+        //     }
+        // },
         reporters: ['progress'],
         browsers: ['PhantomJS'],
         captureTimeout: 60000,

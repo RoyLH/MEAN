@@ -31,7 +31,7 @@ describe('Article Model Unit Tests:', (params) => {
 
     describe('Testing the save method', () => {
         it('Should be able to save without problems', () => {
-            article.sava((err) => {
+            article.save((err) => {
                 should.not.exist(err);
             });
         });

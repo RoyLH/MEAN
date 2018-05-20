@@ -40,7 +40,8 @@ describe('Articles Controller Unit Tests:', () => {
                 .expect('Content-Type', '/json/')
                 .expect(200)
                 .end((err, res) => {
-                    res.body.should.be.an.Array.and.have.lengthOf(1);
+                    // res.body.should.be.an.Array.and.have.lengthOf(1); Uncaught TypeError: Cannot read property 'have' of undefined
+                    res.body.should.be.an.instanceof(Array).and.have.lengthOf(1);
                     res.body[0].should.have.property('title', article.title);
                     res.body[0].should.have.property('content', article.content);
 
@@ -54,7 +55,8 @@ describe('Articles Controller Unit Tests:', () => {
                 .expect('Content-Type', '/json/')
                 .expect(200)
                 .end((err, res) => {
-                    res.body.should.be.an.Object.and.have.property('title', article.title);
+                    // res.body.should.be.an.Object.and.have.property('title', article.title); Uncaught TypeError: Cannot read property 'have' of undefined
+                    res.body.should.be.an.instanceOf(Object).and.have.property('title', article.title);
                     res.body.should.have.property('content', article.content);
 
                     done();
@@ -63,10 +65,11 @@ describe('Articles Controller Unit Tests:', () => {
     });
 
     afterEach((done) => {
-        Article.remove().exec();
-        User.remove.exec();
-
-        done();
+        Article.remove(() => {
+            User.remove(() => {
+                done();
+            });
+        });
     });
 
 });

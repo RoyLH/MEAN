@@ -1,38 +1,36 @@
-'use strict';
-
-describe('Testing Article Controller', function() {
+describe('Testing Articles Controller', function () {
     var _scope, ArticlesController;
 
-    beforeEach(function (params) {
+    beforeEach(function () {
         module('mean');
 
-        jsamine.addMatchers({
-            toEqualData: function (unit, customEqualityTesters) {
+        jasmine.addMatchers({
+            toEqualData: function (util, customEqualityTesters) {
                 return {
-                    pass: angular.equals(actual, expected)
+                    compare: function (actual, expected) {
+                        return {
+                            pass: angular.equals(actual, expected)
+                        };
+                    }
                 };
             }
         });
 
-        inject(function($rootScope, $controller) {
+        inject(function ($rootScope, $controller) {
             _scope = $rootScope.$new();
-
             ArticlesController = $controller('ArticlesController', {
                 $scope: _scope
             });
         });
-
     });
 
-    it('Should have a find that users $resource to retrieve a list if articles', inject(function (Articles) {
+    it('Should have a find method that uses $resource to retrieve a list if articles', inject(function (Articles) {
         inject(function ($httpBackend) {
             var sampleArticle = new Articles({
                 title: 'An Article about MEAN',
                 content: 'MEAN rocks!'
             });
-
             var sampleArticles = [sampleArticle];
-
             $httpBackend.expectGET('/api/articles').respond(sampleArticles);
 
             _scope.find();
@@ -41,7 +39,7 @@ describe('Testing Article Controller', function() {
         });
     }));
 
-    it('Should have a findOne method that users $resource to retrieve a single if articles', inject(function (Articles) {
+    it('Should have a findOne method that users $resource to retrieve a single if article', inject(function (Articles) {
         inject(function ($httpBackend, $routeParams) {
             var sampleArticle = new Articles({
                 title: 'An Article about MEAN',

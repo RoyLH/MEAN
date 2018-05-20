@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Testing Articles Controller', function () {
     var _scope, ArticlesController;
 

@@ -1,5 +1,8 @@
+'use strict'
+
 module.exports = function (config) {
     config.set({
+        basePath: '',
         frameworks: ['jasmine'],
         files: [
             'public/lib/angular/angular.js',
@@ -12,16 +15,16 @@ module.exports = function (config) {
             'public/*[!lib]*/tests/unit/*.js',
             'public/core/**/*.html'
         ],
-        // preprocessors: {
-            // 'public/core/**/*.html': ['ng-html2js']
-        // },
-        // ngHtml2JsPreprocessor: {
-        //     moduleName: 'mean',
-
-        //     cacheIdFromPath: function (filepath) {
-        //         return filepath;
-        //     }
-        // },
+        preprocessors: {
+            'public/core/**/*.html': ['ng-html2js']
+        },
+        ngHtml2JsPreprocessor: {
+            moduleName: 'mean',
+            cacheIdFromPath: function (filepath) {
+                return filepath;
+            }
+        },
+        logLevel: config.LOG_INFO,
         reporters: ['progress'],
         browsers: ['PhantomJS'],
         captureTimeout: 60000,

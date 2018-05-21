@@ -2,7 +2,6 @@
 
 module.exports = function (config) {
     config.set({
-        basePath: '',
         frameworks: ['jasmine'],
         files: [
             'public/lib/angular/angular.js',
@@ -20,6 +19,7 @@ module.exports = function (config) {
         },
         ngHtml2JsPreprocessor: {
             moduleName: 'mean',
+
             cacheIdFromPath: function (filepath) {
                 return filepath;
             }
@@ -30,6 +30,7 @@ module.exports = function (config) {
         captureTimeout: 60000,
         singleRun: true,
         plugins: [
+            'karma-ng-html2js-preprocessor',
             'karma-phantomjs-launcher',
             'karma-jasmine'
         ]

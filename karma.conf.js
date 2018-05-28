@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = function (config) {
     config.set({
         frameworks: ['jasmine'],
@@ -22,11 +24,13 @@ module.exports = function (config) {
                 return filepath;
             }
         },
+        logLevel: config.LOG_INFO,
         reporters: ['progress'],
         browsers: ['PhantomJS'],
         captureTimeout: 60000,
         singleRun: true,
         plugins: [
+            'karma-ng-html2js-preprocessor',
             'karma-phantomjs-launcher',
             'karma-jasmine'
         ]

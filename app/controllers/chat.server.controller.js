@@ -11,7 +11,7 @@ module.exports = (io, socket) => {
         username: socket.request.user.username
     });
 
-    socket.on('chatMessage', (message) => {
+    socket.on('chatMessage', message => {
         // 该函数负责处理由socket客户端发过来的消息
         // 事件处理程序接收到来自客户端的消息后，会添加消息类型，用户信息 
         // 然后再通过io.emit()方法发送给所有已连接到服务器的socket客户端
@@ -22,7 +22,7 @@ module.exports = (io, socket) => {
         io.emit('chatMessage', message);
     });
 
-    socket.on('disconnect', (message) => {
+    socket.on('disconnect', message => {
         // 该程序负责处理系统事件disconnect
         // 当某个用户与服务器之间断开连接之后
         // 该事件处理程序便会通过io.emit()方法通知所有已连接的客户端

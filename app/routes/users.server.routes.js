@@ -4,6 +4,9 @@ const users = require('../../app/controllers/users.server.controller'),
     passport = require('passport');
 
 module.exports = (app) => {
+    
+    app.param('userId', users.userByID);
+    
     app.route('/users')
         .post(users.create)
         .get(users.list);
@@ -60,6 +63,4 @@ module.exports = (app) => {
         failureRedirect: '/signin',
         successRedirect: '/'
     }));
-
-    app.param('userId', users.userByID);
 };

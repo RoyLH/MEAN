@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto');
 
-let UserSchema = new Schema({
+const UserSchema = new Schema({
     firstName: {
         type: String
     },
@@ -106,7 +106,7 @@ UserSchema.statics = {
                 username: possibleUsername
             })
             .exec()
-            .then((user) => {
+            .then(user => {
                 if (!user) {
                     callback(possibleUsername);
                 } else {
@@ -120,7 +120,7 @@ UserSchema.statics = {
 };
 
 UserSchema.methods = {
-    hashPassword: function(password, salt) {
+    hashPassword: function(password) {
         return crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
     },
     authenticate: function (password) {

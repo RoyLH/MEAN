@@ -3,7 +3,7 @@
 const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-let ArticleSchema = new Schema({
+const ArticleSchema = new Schema({
     title: {
         type: String,
         default: '',

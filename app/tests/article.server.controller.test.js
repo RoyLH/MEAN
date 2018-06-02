@@ -10,7 +10,7 @@ const app = require('../../server'),
 let user, article;
 
 describe('Articles Controller Unit Tests:', () => {
-    beforeEach((done) => {
+    beforeEach(done => {
         user = new User({
             firstName: 'Full',
             lastName: 'Name',
@@ -27,20 +27,21 @@ describe('Articles Controller Unit Tests:', () => {
                 user: user
             });
 
-            article.save((err) => {
+            article.save(err => {
                 done();
             });
         });
     });
 
     describe('Testing the GET mothods:', () => {
-        it('Should be able to get the list of articles', (done) => {
+        it('Should be able to get the list of articles', done => {
             request(app).get('/api/articles/')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', '/json/')
                 .expect(200)
                 .end((err, res) => {
-                    // res.body.should.be.an.Array.and.have.lengthOf(1); Uncaught TypeError: Cannot read property 'have' of undefined 判断是否是一个数组 该方法已经不支持 改用下面一行
+                    // res.body.should.be.an.Array.and.have.lengthOf(1); 
+                    // Uncaught TypeError: Cannot read property 'have' of undefined 判断是否是一个数组 该方法已经不支持 改用下面一行
                     res.body.should.be.an.instanceof(Array).and.have.lengthOf(1);
                     res.body[0].should.have.property('title', article.title);
                     res.body[0].should.have.property('content', article.content);
@@ -49,13 +50,14 @@ describe('Articles Controller Unit Tests:', () => {
                 });
         });
 
-        it('Should be able to get the specific articles', (done) => {
+        it('Should be able to get the specific articles', done => {
             request(app).get('/api/articles/' + article.id)
                 .set('Accept', 'application/json')
                 .expect('Content-Type', '/json/')
                 .expect(200)
                 .end((err, res) => {
-                    // res.body.should.be.an.Object.and.have.property('title', article.title); Uncaught TypeError: Cannot read property 'have' of undefined
+                    // res.body.should.be.an.Object.and.have.property('title', article.title); 
+                    // Uncaught TypeError: Cannot read property 'have' of undefined
                     res.body.should.be.an.instanceOf(Object).and.have.property('title', article.title);
                     res.body.should.have.property('content', article.content);
 

@@ -3,7 +3,7 @@
 const users = require('../../app/controllers/users.server.controller'),
     passport = require('passport');
 
-module.exports = (app) => {
+module.exports = app => {
     
     app.param('userId', users.userByID);
     

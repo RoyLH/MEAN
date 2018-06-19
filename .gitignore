@@ -60,4 +60,5 @@ typings/
 .idea
 .vscode
 .DS_Store
+public/lib
 .history/

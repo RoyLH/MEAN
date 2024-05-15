@@ -87,7 +87,7 @@ exports.update = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    req.user.remove() //这里直接从req.user删除了
+    req.user.deleteOne() //这里直接从req.user删除了
         .then(user => res.json(user)) // 这里是删除前的user 这是因为在 userByID 方法中, req.user = user 这两个对象的指向是相同的 都是实例 可以删除
         .catch(err => {
             if (err) return res.json({
@@ -148,8 +148,10 @@ exports.renderSignin = (req, res, next) => {
 // 为什么没有 exports.signin()方法? 这是因为 passport提供了一个专门的身份验证方法, 可以直接用于定义路由 即passport.authenticate()方法
 
 exports.signout = (req, res, next) => {
-    req.logout();
-    return res.redirect('/');
+    req.logout(function(err) {
+        if (err) return next(err);
+        res.redirect('/');
+    });
 };
 
 exports.saveOAuthUserProfile = (req, profile, done) => {

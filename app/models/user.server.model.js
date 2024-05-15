@@ -75,7 +75,7 @@ UserSchema.virtual('fullName')
 // 预处理中间件 在操作执行前触发
 UserSchema.pre('save', function (next) {
     if (this.password) {
-        this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+        this.salt = Buffer.from(crypto.randomBytes(16).toString('base64'), 'base64');
         this.password = this.hashPassword(this.password);
         next();
     } else {

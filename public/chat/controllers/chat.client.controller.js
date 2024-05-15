@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('chat').controller('ChatController', ['$scope', 'Socket', function ($scope, Socket) {
-    $scope.message = [];
+    $scope.messages = [];
     Socket.on('chatMessage', function (message) {
-        $scope.message.push(message);
+        $scope.messages.push(message);
     });
 
     $scope.sendMessage = function () {

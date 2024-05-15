@@ -7,7 +7,7 @@ const config = require('./config'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     session = require('express-session'),
-    MongoStore = require('connect-mongo')(session);
+    MongoStore = require('connect-mongo'),
     flash = require('connect-flash'),
     passport = require('passport'),
     http = require('http'),
@@ -16,7 +16,7 @@ const config = require('./config'),
 module.exports = (db) => {
     let app = express();
     let server = http.createServer(app); // 用http模块的创建的server对象来包装express的app对象
-    let io = socketio.listen(server); // 使用socket.io模块的listen()方法将socket.io服务器附加给server对象
+    const io = socketio(server); // 使用socket.io模块的listen()方法将socket.io服务器附加给server对象
 
     if (process.env.NODE_ENV === 'development') {
         app.use(morgan('dev'));
@@ -33,9 +33,9 @@ module.exports = (db) => {
     // 由于socket.io是一个独立的模块, 给它发的请求与express应用没有任何关系，也就是说没办法在socket连接中使用express会话
     // 导致一个严重问题就是无法再应用的socket层中使用passport来进行身份验证 为此需要配置一个持久的会话存储 以便于在socket的握手中访问express的会话信息
     // express会话信息都是存储在内存中的，所以socket.io无法对其进行访问 因此更好的办法是将会话信息保存在MongoDB中
-    let mongoStore = new MongoStore({
+    let mongoStore = MongoStore.create({
         // db: db.connection.db
-        url: config.db
+        mongoUrl: config.db
     });
     // express-session模块通过浏览器的cookie来存储用户的唯一标识
     // session 中间件会为应用中所有的请求对象增加一个session对象(req.session)，通过这个对象可以设置或者获取当前会话的任意属性(req.session.xxx)。

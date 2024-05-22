@@ -7,7 +7,8 @@ describe('Testing Articles Controller', function () {
         module('mean');
 
         jasmine.addMatchers({
-            toEqualData: function (util, customEqualityTesters) {
+            // https://jasmine.github.io/tutorials/upgrading_to_Jasmine_4.0#matchers-cet
+            toEqualData: function (matchersUtil) {
                 return {
                     compare: function (actual, expected) {
                         return {

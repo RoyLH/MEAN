@@ -54,6 +54,9 @@ npm install bower -g
 bower install
 
 npm install
+// 如果下载错误 就解压目录里的压缩包node_modules.zip 项目比较久远 各个npm和node版本之间的依赖关系比较难梳理
+// grunt-node-inspector 是在v6.17.1环境下下来的。。。
+unzip node_modules.zip
 ```
 
 ## Node Server Test
@@ -120,4 +123,10 @@ exports.config = {
   // 下载地址： https://developer.chrome.com/docs/chromedriver?hl=zh-cn
   chromeDriver: '/usr/local/bin/chromedriver', 
 }
+```
+
+### Grunt
+
+```bash
+npm i grunt-cli -g
 ```

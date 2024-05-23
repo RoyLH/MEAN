@@ -178,6 +178,25 @@ exports.saveOAuthUserProfile = (req, profile, done) => {
                         }
                         return done(err, user);
                     });
+
+                    user.save()
+                    .then(user => {
+                        console.log('user', user);
+
+                        req.login(user, err => {
+                            if (err) return done(err);
+                            // return req.redirect('/');
+                            done();
+                        })
+                    })
+                    .catch(err => {
+                        console.log('err', err);
+                        var message = getErrorMessage(err);
+
+                        req.flash('error', message);
+                        return req.redirect('/signup');
+                    })
+                        
                 });
             } else {
                 return done(null, user);

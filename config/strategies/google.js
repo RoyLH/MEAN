@@ -1,14 +1,13 @@
 'use strict';
 
 const passport = require('passport'),
-    url = require('url'),
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-    // GoogleStrategy = require('passport-google-oidc'),
+    HttpsProxyAgent = require('https-proxy-agent').HttpsProxyAgent,
     config = require('../config'),
     users = require('../../app/controllers/users.server.controller');
 
 module.exports = () => {
-    passport.use(new GoogleStrategy({
+    const googleStrategy = new GoogleStrategy({
         clientID: config.google.clientID,
         clientSecret: config.google.clientSecret,
         callbackURL: config.google.callbackURL,
@@ -19,32 +18,27 @@ module.exports = () => {
         console.log('refreshToken =>', refreshToken)
         console.log('profile =>', profile)
 
-        // let providerData = profile._json;
-        // providerData.accessToken = accessToken;
-        // providerData.refreshToken = refreshToken;
+        let providerData = profile._json;
+        providerData.accessToken = accessToken;
+        providerData.refreshToken = refreshToken;
 
-        // let providerUserProfile = {
-        //     firstName: profile.name.givenName,
-        //     lastName: profile.name.familyName,
-        //     fullName: profile.displayName,
-        //     email: profile.emails[0].value,
-        //     username: profile.username,
-        //     provider: 'google',
-        //     providerId: profile.id,
-        //     providerData: providerData
-        // };
+        let providerUserProfile = {
+            firstName: profile.name.givenName,
+            lastName: profile.name.familyName,
+            fullName: profile.displayName,
+            email: profile.emails[0].value,
+            username: profile.username,
+            provider: 'google',
+            providerId: profile.id,
+            providerData: providerData
+        };
 
-        // users.saveOAuthUserProfile(req, providerUserProfile, done);
-    }));
+        users.saveOAuthUserProfile(req, providerUserProfile, done);
+    });
 
-    // passport.use(new GoogleStrategy({
-    //     clientID: config.google.clientID,
-    //     clientSecret: config.google.clientSecret,
-    //     callbackURL: config.google.callbackURL,
-    //     scope: [ 'profile', 'email' ]
-    // }, function verify(issuer, profile, cb) {
-    //     console.log('issuer =>', issuer)
-    //     console.log('profile =>', profile)
-    //     console.log(cb)
-    // }));
+    // 伟大的“墙”。。。
+    const agent = new HttpsProxyAgent(process.env.HTTP_PROXY || 'http://127.0.0.1:17890');
+    googleStrategy._oauth2.setAgent(agent);
+
+    passport.use(googleStrategy);
 };

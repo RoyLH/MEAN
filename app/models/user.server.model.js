@@ -79,7 +79,8 @@ UserSchema.pre('save', function (next) {
         this.password = this.hashPassword(this.password);
         next();
     } else {
-        next(new Error('An Error Accured'));
+        // next(new Error('An Error Accured')); // 注释掉改为next()是为第三方登录放行 第三方dengue不需要password
+        next();
     }
 });
 

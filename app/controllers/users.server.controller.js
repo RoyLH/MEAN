@@ -169,34 +169,19 @@ exports.saveOAuthUserProfile = (req, profile, done) => {
 
                     user = new User(profile);
 
-                    user.save(function (err) {
-                        if (err) {
-                            var message = this.getErrorMessage(err);
-
-                            req.flash('error', message);
-                            return req.redirect('/signup');
-                        }
-                        return done(err, user);
-                    });
-
                     user.save()
-                    .then(user => {
-                        console.log('user', user);
+                        .then(user => {
+                            console.log('user', user);
 
-                        req.login(user, err => {
-                            if (err) return done(err);
-                            // return req.redirect('/');
-                            done();
+                            req.login(user, err => {
+                                if (err) return done(err);
+                                return done(null, user);
+                            })
                         })
-                    })
-                    .catch(err => {
-                        console.log('err', err);
-                        var message = getErrorMessage(err);
-
-                        req.flash('error', message);
-                        return req.redirect('/signup');
-                    })
-                        
+                        .catch(err => {
+                            console.log('err', err);
+                            return done(err);
+                        })
                 });
             } else {
                 return done(null, user);

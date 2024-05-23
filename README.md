@@ -52,6 +52,7 @@ db.auth("root", "123gogogo");
 ```bash
 npm install bower -g
 bower install
+// 如果下载错误 unzip public/lib.zip
 
 npm install
 // 如果下载错误 npm install --legacy-peer-deps

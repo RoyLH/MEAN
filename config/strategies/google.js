@@ -14,9 +14,9 @@ module.exports = () => {
         passReqToCallback: true,
         scope: ['profile', 'email'] // https://developers.google.com/identity/protocols/oauth2?hl=zh-cn
     }, function verify(req, accessToken, refreshToken, profile, done) {
-        console.log('accessToken =>', accessToken)
-        console.log('refreshToken =>', refreshToken)
-        console.log('profile =>', profile)
+        console.log('accessToken =>', accessToken);
+        console.log('refreshToken =>', refreshToken);
+        console.log('profile =>', profile);
 
         let providerData = profile._json;
         providerData.accessToken = accessToken;

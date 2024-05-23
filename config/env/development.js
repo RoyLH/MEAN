@@ -8,10 +8,11 @@ module.exports = {
         clientSecret: 'facebookClientSecret',
         callbackURL: 'http://localhost:3000/oauth/facebook/callback'
     },
+    // https://developer.x.com/en/portal/projects-and-apps
     twitter: {
-        consumerKey: 'tybP8KZMI5Qer0LIpES3vLMva',
-        consumerSecret: 'ZJDVmyNdmRtkkN1cnRZSVVaN4vgqV1c1j5nb2rd8MdvVmcxltu',
-        callbackURL: 'http://localhost:3000/oauth/twitter/callback'
+        consumerKey: 'Ge0QK0k89PKWUz7tnnV6VlP6R',
+        consumerSecret: 'fYpdmAxJemsU0BNBNbM9dahdsJKGMWHYeTWGrHJt6P1kf8u0kS',
+        callbackURL: 'http://127.0.0.1:3000/oauth/twitter/callback'
     },
     // https://console.cloud.google.com/apis/credentials?project=capable-hexagon-424213-i1
     // https://console.cloud.google.com/apis/credentials/consent?project=capable-hexagon-424213-i1

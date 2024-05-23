@@ -38,13 +38,13 @@ db.auth("root", "123gogogo");
 ### Express
 
 ```bash
-see bower.json
+// see bower.json
 ```
 
 ### AngularJS
 
 ```bash
-see package.json
+// see package.json
 ```
 
 ## Deps Install
@@ -54,7 +54,8 @@ npm install bower -g
 bower install
 
 npm install
-// 如果下载错误 就解压目录里的压缩包node_modules.zip 项目比较久远 各个npm和node版本之间的依赖关系比较难梳理
+// 如果下载错误 npm install --legacy-peer-deps
+// 如果还下载错误 就解压目录里的压缩包node_modules.zip 项目比较久远 各个npm和node版本之间的依赖关系比较难梳理
 // grunt-node-inspector 是在v6.17.1环境下下来的。。。
 unzip node_modules.zip
 ```

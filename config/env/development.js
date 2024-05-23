@@ -13,9 +13,12 @@ module.exports = {
         consumerSecret: 'ZJDVmyNdmRtkkN1cnRZSVVaN4vgqV1c1j5nb2rd8MdvVmcxltu',
         callbackURL: 'http://localhost:3000/oauth/twitter/callback'
     },
+    // https://console.cloud.google.com/apis/credentials?project=capable-hexagon-424213-i1
+    // https://console.cloud.google.com/apis/credentials/consent?project=capable-hexagon-424213-i1
+    // https://myaccount.google.com/connections
     google: {
-        clientID: '361041994869-v5vl8amkgtbfg493meps1nmk52augacp.apps.googleusercontent.com',
-        clientSecret: '2k0IT3Vdrh1QXN6Q0y8CruEa',
+        clientID: '350806475579-qov112h26jncladda46t30sf1juupdcp.apps.googleusercontent.com',
+        clientSecret: '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',
         callbackURL: 'http://localhost:3000/oauth/google/callback'
     }
 };

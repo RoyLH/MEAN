@@ -12,7 +12,7 @@ module.exports = {
     twitter: {
         consumerKey: 'Ge0QK0k89PKWUz7tnnV6VlP6R',
         consumerSecret: 'fYpdmAxJemsU0BNBNbM9dahdsJKGMWHYeTWGrHJt6P1kf8u0kS',
-        callbackURL: 'http://127.0.0.1:3000/oauth/twitter/callback'
+        callbackURL: 'http://localhost:3000/oauth/twitter/callback'
     },
     // https://console.cloud.google.com/apis/credentials?project=capable-hexagon-424213-i1
     // https://console.cloud.google.com/apis/credentials/consent?project=capable-hexagon-424213-i1

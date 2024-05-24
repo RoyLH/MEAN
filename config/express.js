@@ -42,8 +42,9 @@ module.exports = (db) => {
     app.use(session({
         saveUninitialized: true,
         resave: false,
+        key: 'sid',
         cookie: {
-            sucure: false,
+            sucure: true,
         },
         secret: config.sessionSecret, // 为了标记会话，需要使用一个密钥，这可以有效防止恶意的会话污染。为了安全起见，建议在不同的环境使用不同的cookie密钥
         store: mongoStore // express会话信息的存储位置

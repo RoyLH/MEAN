@@ -35,9 +35,11 @@ module.exports = () => {
     const twitterStrategy = new TwitterStrategy({
         clientID: 'eElZdWRnN1lIdmxWQTNWclp6MzQ6MTpjaQ',
         clientSecret: 'nInu7wgNdyAxAd_gdfYYvG5i-Kcc_wJ4TL5IFt_9z7UzanK_Lo',
-        clientType: 'Confidential',
+        clientType: 'confidential',
         callbackURL: config.twitter.callbackURL,
-        // scope: ['profile']
+        state: true,
+        proxy: true,
+        responseType: 'code'
     }, function verify(accessToken, refreshToken, profile, done) {
         console.log('accessToken =>', accessToken);
         console.log('refreshToken =>', refreshToken);

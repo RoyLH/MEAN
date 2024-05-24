@@ -35,7 +35,7 @@ module.exports = () => {
     const twitterStrategy = new TwitterStrategy({
         clientID: 'eElZdWRnN1lIdmxWQTNWclp6MzQ6MTpjaQ',
         clientSecret: 'nInu7wgNdyAxAd_gdfYYvG5i-Kcc_wJ4TL5IFt_9z7UzanK_Lo',
-        clientType: 'public',
+        clientType: 'confidential',
         callbackURL: config.twitter.callbackURL,
         passReqToCallback: true,
         // state: true,
@@ -47,8 +47,8 @@ module.exports = () => {
         console.log('profile =>', profile);
 
         let providerData = profile._json;
-        providerData.token = token;
-        providerData.tokenSecret = tokenSecret;
+        providerData.accessToken = accessToken;
+        providerData.refreshToken = refreshToken;
 
         let providerUserProfile = {
             fullName: profile.displayName,

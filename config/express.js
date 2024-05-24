@@ -42,7 +42,6 @@ module.exports = (db) => {
     app.use(session({
         saveUninitialized: true,
         resave: false,
-        key: 'sid',
         cookie: {
             sucure: true,
         },

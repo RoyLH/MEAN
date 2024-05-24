@@ -37,7 +37,7 @@ module.exports = () => {
     });
 
     // 伟大的“墙”。。。
-    const agent = new HttpsProxyAgent(process.env.HTTP_PROXY || 'http://127.0.0.1:17890');
+    const agent = new HttpsProxyAgent(process.env.HTTP_PROXY);
     googleStrategy._oauth2.setAgent(agent);
 
     passport.use(googleStrategy);

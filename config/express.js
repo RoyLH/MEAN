@@ -41,7 +41,8 @@ module.exports = (db) => {
     // session 中间件会为应用中所有的请求对象增加一个session对象(req.session)，通过这个对象可以设置或者获取当前会话的任意属性(req.session.xxx)。
     app.use(session({
         saveUninitialized: true,
-        resave: true,
+        resave: false,
+        sucure: false,
         secret: config.sessionSecret, // 为了标记会话，需要使用一个密钥，这可以有效防止恶意的会话污染。为了安全起见，建议在不同的环境使用不同的cookie密钥
         store: mongoStore // express会话信息的存储位置
     }));

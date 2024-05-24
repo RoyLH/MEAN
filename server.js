@@ -1,13 +1,25 @@
 'use strict';
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+const fs = require('fs');
+const dotenv = require('dotenv');
+
+// 获取当前环境
+const env = process.env.NODE_ENV || 'development';
+// 根据环境加载相应的 .env 文件
+const envFile = `.env.${env}`;
+
+if (fs.existsSync(envFile)) {
+  dotenv.config({ path: envFile });
+} else {
+  dotenv.config();
+}
 
 const mongoose = require('./config/mongoose'),
-    express = require('./config/express');
+    express = require('./config/express'),
+    db = mongoose(),
+    app = express(db);
     
-
-let db = mongoose(),
-    app = express(db),
-    passport = require('./config/passport')();
+require('./config/passport')();
 
 app.listen(3000);
 

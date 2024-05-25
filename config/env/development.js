@@ -3,9 +3,10 @@
 module.exports = {
     db: 'mongodb://localhost/mean',
     sessionSecret: 'developmentSessionSecret',
+    // https://developers.facebook.com/apps/470787615336311/dashboard/ facebook 一言难尽。。。无法发布APP 用不了
     facebook: {
-        clientID: 'facebookClientID',
-        clientSecret: 'facebookClientSecret',
+        clientID: '470787615336311',
+        clientSecret: 'df918f04ea5cb8a4132188d7d4cad601',
         callbackURL: 'http://localhost:3000/oauth/facebook/callback'
     },
     // https://developer.x.com/en/portal/projects-and-apps

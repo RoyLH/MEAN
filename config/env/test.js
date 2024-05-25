@@ -3,9 +3,10 @@
 module.exports = {
     db: 'mongodb://localhost/mean-test',
     sessionSecret: 'testSessionSecret',
+    // https://developers.facebook.com/apps/470787615336311/dashboard/
     facebook: {
-        clientID: 'facebookClientID',
-        clientSecret: 'facebookClientSecret',
+        clientID: '470787615336311',
+        clientSecret: 'df918f04ea5cb8a4132188d7d4cad601',
         callbackURL: 'http://localhost:3000/oauth/facebook/callback'
     },
     // https://developer.x.com/en/portal/projects-and-apps

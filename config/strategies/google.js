@@ -14,9 +14,7 @@ module.exports = () => {
         passReqToCallback: true,
         scope: ['profile', 'email'] // https://developers.google.com/identity/protocols/oauth2?hl=zh-cn
     }, function verify(req, accessToken, refreshToken, profile, done) {
-        console.log('accessToken =>', accessToken);
-        console.log('refreshToken =>', refreshToken);
-        console.log('profile =>', profile);
+        
 
         let providerData = profile._json;
         providerData.accessToken = accessToken;
@@ -39,8 +37,8 @@ module.exports = () => {
     // 伟大的“墙”。。。
     if (process.env.HTTP_PROXY) {
         const agent = new HttpsProxyAgent(process.env.HTTP_PROXY);
-        googleStrategy._oauth2.setAgent(agent)
-    };
+        googleStrategy._oauth2.setAgent(agent);
+    }
 
     passport.use(googleStrategy);
 };

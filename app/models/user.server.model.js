@@ -75,11 +75,12 @@ UserSchema.virtual('fullName')
 // 预处理中间件 在操作执行前触发
 UserSchema.pre('save', function (next) {
     if (this.password) {
-        this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+        this.salt = Buffer.from(crypto.randomBytes(16).toString('base64'), 'base64');
         this.password = this.hashPassword(this.password);
         next();
     } else {
-        next(new Error('An Error Accured'));
+        // next(new Error('An Error Accured')); // 注释掉改为next()是为第三方登录放行 第三方dengue不需要password
+        next();
     }
 });
 

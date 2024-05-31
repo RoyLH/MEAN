@@ -1,57 +1,57 @@
 'use strict';
 
-const app = require('../../server'),
-    should = require('should'),
+require('../../server')
+
+const should = require('should'),
     mongoose = require('mongoose'),
     User = mongoose.model('User'),
-    Article = mongoose.model('Article');
+    Article = mongoose.model('Article')
 
-let user, article;
+let user, article
 
-describe('Article Model Unit Tests:', (params) => {
-    beforeEach((done) => {
+describe('Article Model Unit Tests:', () => {
+    beforeEach(async () => {
         user = new User({
             firstName: 'Full',
             lastName: 'Name',
             displayName: 'Full Name',
-            email: 'username',
-            passpord: 'password'
-        });
+            email: 'test@test.com',
+            username: 'username',
+            password: 'password',
+            provider: 'local'
+        })
 
-        user.save(() => {
-            article = new Article({
-                title: 'Article Title',
-                content: 'Article Content',
-                user: user
-            });
+        const savedUser = await user.save()
 
-            done();
-        });
-    });
+        article = new Article({
+            title: 'Article Title',
+            content: 'Article Content',
+            user: savedUser
+        })
+    })
 
     describe('Testing the save method', () => {
-        it('Should be able to save without problems', () => {
-            article.save((err) => {
+        it('Should be able to save without problems', async() => {
+            try {
+                await article.save();
+            } catch (err) {
                 should.not.exist(err);
-            });
-        });
+            }
+        })
 
-        it('should not be able to save an article without a article', () => {
-            article.title = '';
+        it('should not be able to save an article without a article', async() => {
+            article.title = ''
 
-            article.save((err) => {
-                should.exist(err);
-            });
-        });
-        
-    });
-
-    afterEach((done) => {
-        Article.remove(() => {
-            User.remove(() => {
-                done();
-            });
+            try {
+                await article.save()
+            } catch (err) {
+                should.exist(err)
+            }
         });
     });
 
-});
+    afterEach(async () => {
+        await Article.deleteMany({})
+        await User.deleteMany({})
+    })
+})

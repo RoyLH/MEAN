@@ -32,7 +32,7 @@ exports.articleById = (req, res, next, id) => {
 
 exports.create = (req, res, next) => {
     let article = new Article(req.body);
-    article.user = req.user;
+    article.creator = req.user;
 
     article.save()
         .then(article => res.json(article))
@@ -78,7 +78,7 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res, next) => {
     let article = req.article;
 
-    article.remove()
+    article.deleteOne()
         .then(article => res.json(article))
         .catch(err => {
             return res.status(400).send({
